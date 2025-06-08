@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="enen">
+<head>
+  <meta charset="UTF-8" />
+  <title>Giới thiệu bản thân</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<style>
+    body { font-family: sans-serif; padding: 20px; }
+
+/* Menu */
+.menu {
+  display: flex; justify-content: space-around;
+  background: #333; padding: 10px;
+}
+.menu a {
+  color: #fff; text-decoration: none;
+}
+.menu a:hover { text-decoration: underline; }
+
+/* Giới thiệu */
+.intro {
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+}
+.avatar {
+  width: 100px; border-radius: 50%;
+}
+
+/* Môn học yêu thích */
+.grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;
+}
+.card {
+  border: 1px solid #ccc; padding: 10px; text-align: center;
+}
+
+/* TKB */
+.tkb .row {
+  display: grid; grid-template-columns: 1fr 2fr 1fr;
+  background: #eef; margin: 5px 0; padding: 5px;
+}
+
+/* Form */
+.form {
+  display: flex; flex-direction: column; gap: 10px;
+}
+input, textarea {
+  padding: 8px; border: 1px solid #ccc;
+}
+button {
+  padding: 8px; background: blue; color: white; border: none;
+}
+
+</style>
+<body>
+
+  <!-- Menu -->
+  <nav class="menu">
+    <a href="#gioithieu">Giới thiệu</a>
+    <a href="#monhoc">Môn học</a>
+    <a href="#thoikhoabieu">TKB</a>
+    <a href="#dangky">Đăng ký</a>
+  </nav>
+
+  <!-- Giới thiệu -->
+  <section id="gioithieu" class="intro">
+    <img src="/images/img1.jpg" class="avatar" />
+    <div>
+      <h2>Vũ Phi Long</h2>
+      <p>Yêu thích lập trình và thiết kế web.</p>
+    </div>
+  </section>
+
+  <!-- Môn học -->
+  <section id="monhoc" class="grid">
+    <div class="card">Lập trình</div>
+    <div class="card">CSDL</div>
+    <div class="card">Python</div>
+  </section>
+
+  <!-- Thời khoá biểu -->
+  <section id="thoikhoabieu" class="tkb">
+    <div class="row"><div>Thứ 2</div><div>Web</div><div>7-9h</div></div>
+    <div class="row"><div>Thứ 3</div><div>Python</div><div>9-11h</div></div>
+  </section>
+
+  <!-- Form -->
+  <section id="dangky">
+    <form class="form">
+      <input type="text" placeholder="Họ tên" />
+      <input type="email" placeholder="Email" />
+      <textarea placeholder="Nội dung"></textarea>
+      <button>Gửi</button>
+    </form>
+  </section>
+
+</body>
+</html>
