@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Dự án nhỏ với Flexbox & Grid</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h2 { margin-top: 40px; }
+
+    /* Sản phẩm bán hàng */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
+    .product-card {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+      border-radius: 8px;
+    }
+    .product-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+    }
+    .product-card button {
+      margin-top: 10px;
+      padding: 6px 12px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Thông tin du lịch */
+    .travel-info {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .travel-info img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    /* Tin tức */
+    .news {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .news-card {
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 6px;
+      transition: transform 0.3s;
+    }
+    .news-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .news-card:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Lịch sự kiện */
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+    .event {
+      border: 1px solid #aaa;
+      padding: 10px;
+      border-radius: 6px;
+      background: #f9f9f9;
+      min-height: 100px;
+    }
+
+    /* CV cá nhân */
+    .cv {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 20px;
+    }
+    .cv-section {
+      margin-bottom: 20px;
+    }
+    .cv-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .cv-item i {
+      font-style: normal;
+      color: #007bff;
+    }
+
+    @media (max-width: 768px) {
+      .travel-info, .cv {
+        flex-direction: column;
+        display: block;
+      }
+      .cv {
+        grid-template-columns: 1fr;
+      }
+      .calendar {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h2>📱 Trang Bán hàng Điện thoại</h2>
+<div class="products">
+  <div class="product-card">
+    <img src="/images/img8.jpg" alt="SP1">
+    <h4>iPhone 15</h4>
+    <p>Giá: 24.990.000đ</p>
+    <button>Mua ngay</button>
+  </div>
+  <div class="product-card">
+    <img src="/images/img6.jpg" alt="SP2">
+    <h4>Samsung S23</h4>
+    <p>Giá: 19.990.000đ</p>
+    <button>Mua ngay</button>
+  </div>
+</div>
+
+<h2>🌍 Trang Thông tin Du lịch</h2>
+<div class="travel-info">
+  <div style="flex:1">
+    <h4>Đà Lạt – Thành phố ngàn hoa</h4>
+    <p>Khám phá khí hậu mát mẻ, hồ Xuân Hương, vườn hoa, đồi thông và nhiều điểm nghỉ dưỡng lý tưởng.</p>
+  </div>
+  <div style="flex:1">
+    <img src="/images/img7.jpg" alt="Dalat">
+  </div>
+</div>
+
+<h2>📰 Trang Tin tức</h2>
+<div class="news">
+  <div class="news-card">
+    <img src="/images/img9.jpg" alt="">
+    <h4>Tin nóng hôm nay</h4>
+    <p>Mô tả ngắn gọn về sự kiện nổi bật trong ngày.</p>
+  </div>
+  <div class="news-card">
+    <img src="/images/img10.jpg" alt="">
+    <h4>Thời tiết cả nước</h4>
+    <p>Dự báo thời tiết 3 ngày tới với mưa rào nhẹ ở miền Bắc.</p>
+  </div>
+</div>
+
+<h2>📅 Trang Lịch Sự kiện</h2>
+<div class="calendar">
+  <div class="event"><strong>Thứ 2</strong><br>Họp nhóm</div>
+  <div class="event"><strong>Thứ 3</strong><br>Học ReactJS</div>
+  <div class="event"><strong>Thứ 4</strong><br>Chạy bộ</div>
+  <div class="event"><strong>Thứ 5</strong><br>Tham quan công ty</div>
+  <div class="event"><strong>Thứ 6</strong><br>Xem phim</div>
+  <div class="event"><strong>Thứ 7</strong><br>Đi phượt</div>
+  <div class="event"><strong>CN</strong><br>Nghỉ ngơi</div>
+</div>
+
+<h2>👨‍💼 Tạo CV Cá nhân</h2>
+<div class="cv">
+  <div>
+    <div class="cv-section">
+      <h4>Thông tin</h4>
+      <div class="cv-item"><i>👤</i> Nguyễn Văn A</div>
+      <div class="cv-item"><i>📧</i> an@example.com</div>
+      <div class="cv-item"><i>📞</i> 0123456789</div>
+    </div>
+  </div>
+  <div>
+    <div class="cv-section">
+      <h4>Kinh nghiệm</h4>
+      <div class="cv-item"><i>💼</i> Lập trình viên tại FPT</div>
+    </div>
+    <div class="cv-section">
+      <h4>Kỹ năng</h4>
+      <div class="cv-item"><i>💻</i> HTML, CSS, JavaScript</div>
+      <div class="cv-item"><i>🔧</i> React, Node.js</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
