@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Form nâng cao</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h2 { margin-top: 40px; }
+    input, textarea, select, button {
+      padding: 8px;
+      margin: 5px 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    button {
+      background: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
+    }
+    input:focus, textarea:focus {
+      outline: 2px solid #007bff;
+    }
+
+    /* Form đăng nhập */
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      max-width: 300px;
+      margin: auto;
+      margin-bottom: 40px;
+    }
+    .login-form button {
+      margin-top: 10px;
+      align-self: center;
+      width: 100px;
+    }
+
+    /* Form khảo sát */
+    .survey-form .options {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .survey-form textarea {
+      width: 100%;
+      height: 80px;
+    }
+
+    /* Form đặt bàn */
+    .booking-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+    .booking-form textarea {
+      grid-column: span 2;
+    }
+
+    /* Form phản hồi */
+    .feedback-form {
+      display: grid;
+      gap: 10px;
+      max-width: 400px;
+      margin-bottom: 40px;
+    }
+    .stars {
+      display: flex;
+      gap: 5px;
+      justify-content: start;
+    }
+
+    /* Form thanh toán */
+    .checkout-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 600px) {
+      .checkout-form {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h2>🔐 Form Đăng nhập</h2>
+<form class="login-form">
+  <input type="text" placeholder="Tên đăng nhập">
+  <input type="password" placeholder="Mật khẩu">
+  <button>Đăng nhập</button>
+</form>
+
+<h2>📝 Form Khảo sát</h2>
+<form class="survey-form">
+  <label>Chọn sở thích:</label>
+  <div class="options">
+    <label><input type="checkbox"> Âm nhạc</label>
+    <label><input type="checkbox"> Du lịch</label>
+    <label><input type="checkbox"> Thể thao</label>
+  </div>
+  <label>Ý kiến khác:</label>
+  <textarea></textarea>
+</form>
+
+<h2>🍽️ Form Đặt bàn</h2>
+<form class="booking-form">
+  <div><label>Ngày: <input type="date"></label></div>
+  <div><label>Giờ: <input type="time"></label></div>
+  <div><label>Số người: <input type="number" min="1"></label></div>
+  <div><label>Yêu cầu đặc biệt: <textarea></textarea></label></div>
+</form>
+
+<h2>💬 Form Gửi phản hồi</h2>
+<form class="feedback-form">
+  <input type="text" placeholder="Họ tên">
+  <input type="email" placeholder="Email">
+  <textarea placeholder="Góp ý của bạn..."></textarea>
+  <div class="stars">
+    <label><input type="radio" name="rate"> ⭐</label>
+    <label><input type="radio" name="rate"> ⭐⭐</label>
+    <label><input type="radio" name="rate"> ⭐⭐⭐</label>
+    <label><input type="radio" name="rate"> ⭐⭐⭐⭐</label>
+    <label><input type="radio" name="rate"> ⭐⭐⭐⭐⭐</label>
+  </div>
+</form>
+
+<h2>💳 Form Thanh toán</h2>
+<form class="checkout-form">
+  <div>
+    <h4>Người nhận</h4>
+    <input type="text" placeholder="Họ tên">
+    <input type="text" placeholder="Địa chỉ">
+    <input type="tel" placeholder="SĐT">
+  </div>
+  <div>
+    <h4>Thanh toán</h4>
+    <input type="text" placeholder="Số thẻ">
+    <input type="text" placeholder="Ngày hết hạn">
+    <input type="text" placeholder="CVV">
+  </div>
+</form>
+
+</body>
+</html>
