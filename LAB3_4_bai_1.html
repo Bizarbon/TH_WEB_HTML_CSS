@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Trang Giới Thiệu Bản Thân</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f8ff;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+
+    img.avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 3px solid #0077cc;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    ul.subjects li {
+      list-style-type: none;
+      padding: 10px;
+      margin: 5px;
+    }
+
+    ul.subjects li:nth-child(odd) {
+      background-color: #e0f7fa;
+    }
+
+    ul.subjects li:nth-child(even) {
+      background-color: #ffe0b2;
+    }
+
+    ul.subjects li:hover {
+      background-color: #aed581;
+      cursor: pointer;
+    }
+
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #999;
+      padding: 10px;
+      text-align: center;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tr:nth-child(odd) {
+      background-color: #ffffff;
+    }
+
+    form {
+      margin: 30px auto;
+      width: 300px;
+      text-align: left;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button:hover {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    nav {
+      margin: 20px 0;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #0077cc;
+    }
+
+    nav a:hover {
+      color: #ff4081;
+    }
+
+    nav a:active {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>👋 Chào bạn, tôi là Vũ Phi Long</h1>
+  <img class="avatar" src="images\img1.jpg" alt="Ảnh đại diện">
+
+  <h2>📘 Các môn học yêu thích</h2>
+  <ul class="subjects">
+    <li>Tư Tưởng Hồ Chí Minh</li>
+    <li>Công Nghệ Web</li>
+    <li>Phân Tích Mạng</li>
+    <li>Công Nghệ Thông Tin Với Java</li>
+  </ul>
+
+  <h2>📅 Thời khóa biểu</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Thứ</th>
+        <th>Sáng</th>
+        <th>Chiều</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Thứ 2</td>
+        <td>Java</td>
+        <td>Công Nghệ Web</td>
+      </tr>
+      <tr>
+        <td>Thứ 3</td>
+        <td>Tư Tưởng Hồ Chí Minh</td>
+        <td>Phân Tích Mạng</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>📨 Form đăng ký thông tin</h2>
+  <form>
+    <label>Họ và tên:</label>
+    <input type="text" name="name" required>
+
+    <label>Email:</label>
+    <input type="email" name="email" required>
+
+    <label>Số điện thoại:</label>
+    <input type="tel" name="phone" required>
+
+    <label>Giới tính:</label>
+    <select name="gender">
+      <option>Nam</option>
+      <option>Nữ</option>
+      <option>Khác</option>
+    </select>
+
+    <button type="submit">Gửi</button>
+  </form>
+
+  <nav>
+    <a href="#">Trang Chủ</a>
+    <a href="#">Thông Tin</a>
+    <a href="#">Liên Hệ</a>
+  </nav>
+
+</body>
+</html>
