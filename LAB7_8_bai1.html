@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giới thiệu bản thân</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; background: #f4f4f4; color: #333; }
+
+    nav { display: flex; justify-content: center; gap: 1rem; background: #333; padding: 1rem; }
+    nav a { color: white; text-decoration: none; position: relative; }
+    nav a::after {
+      content: ""; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 2px; background: cyan; transition: 0.3s;
+    }
+    nav a:hover::after { width: 100%; }
+
+    .gioi-thieu { display: flex; align-items: center; justify-content: center; padding: 2rem; gap: 1rem; flex-wrap: wrap; text-align: center; }
+    .gioi-thieu img { width: 120px; border-radius: 50%; }
+
+    .mon-hoc, .tkb, .form-section { padding: 2rem; }
+    .grid-monhoc {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;
+    }
+    .card { background: #fff; padding: 1rem; border: 1px solid #ccc; border-radius: 6px; text-align: center; }
+
+    .bang-tkb { display: grid; gap: 1rem; }
+    .dong { display: grid; grid-template-columns: 1fr 2fr 2fr; background: #fff; padding: 0.5rem; border: 1px solid #ccc; border-radius: 5px; }
+
+    .form-dangky { display: flex; flex-direction: column; gap: 1rem; max-width: 500px; margin: auto; }
+    .form-dangky input, .form-dangky textarea {
+      padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;
+    }
+    button {
+      padding: 0.5rem 1rem; background: #00bcd4; color: #fff;
+      border: none; border-radius: 4px; cursor: pointer;
+    }
+    button:hover { background: #0097a7; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#gioi-thieu">Giới thiệu</a>
+    <a href="#mon-hoc">Môn học</a>
+    <a href="#tkb">TKB</a>
+    <a href="#dangky">Đăng ký</a>
+  </nav>
+
+  <section id="gioi-thieu" class="gioi-thieu">
+    <img src="/images/img1.jpg" alt="avatar">
+    <div>
+      <h2>Vũ Phi Long</h2>
+      <p>Sinh viên CNTT, yêu thích lập trình web.</p>
+    </div>
+  </section>
+
+  <section id="mon-hoc" class="mon-hoc">
+    <h3>Môn học yêu thích</h3>
+    <div class="grid-monhoc">
+      <div class="card">Web</div>
+      <div class="card">AI</div>
+      <div class="card">CSDL</div>
+      <div class="card">Python</div>
+    </div>
+  </section>
+
+  <section id="tkb" class="tkb">
+    <h3>Thời khoá biểu</h3>
+    <div class="bang-tkb">
+      <div class="dong"><div>Thứ 2</div><div>Lập trình C</div><div>7:00 - 9:00</div></div>
+      <div class="dong"><div>Thứ 3</div><div>CSDL</div><div>9:30 - 11:30</div></div>
+      <div class="dong"><div>Thứ 4</div><div>Web</div><div>13:00 - 15:00</div></div>
+    </div>
+  </section>
+
+  <section id="dangky" class="form-section">
+    <h3>Đăng ký</h3>
+    <form class="form-dangky">
+      <input type="text" placeholder="Họ tên">
+      <input type="email" placeholder="Email">
+      <textarea rows="4" placeholder="Lời nhắn"></textarea>
+      <button>Gửi</button>
+    </form>
+  </section>
+
+</body>
+</html>
