@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS - Tên - Console</title>
+</head>
+
+<body>
+
+    <label for="name">Nhập tên: </label>
+    <input type="text" id="name" placeholder="Nhập tên của bạn">
+    <br>
+    <button onclick="showName()">Click Me</button>
+
+    <script>
+        function showName() {
+            const name = document.getElementById('name').value;
+            console.log(`Hello ${name}`);
+        }
+    </script>
+
+</body>
+
+</html>
