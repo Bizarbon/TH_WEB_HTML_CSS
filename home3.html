@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input type="text" id="inputValue" placeholder="Nhập giá trị">
+    <button id="btnCheck">Click</button>
+    <div id="message"></div>
+
+    <script>
+        document.getElementById("btnCheck").onclick = function() {
+            const input = document.getElementById("inputValue").value;
+            const messageDiv = document.getElementById("message");
+
+            if (input === "") {
+                messageDiv.innerHTML = "Bạn chưa nhập gì.";
+            } else if (!isNaN(input)) {
+                messageDiv.innerHTML = "Bạn vừa nhập số.";
+            } else {
+                messageDiv.innerHTML = "Bạn vừa nhập text.";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
