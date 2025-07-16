@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dự án nhỏ Flexbox/Grid</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; padding: 1.5rem; background: #f9f9f9; color: #333; }
+    h2 { margin: 1.5rem 0 0.5rem; }
+
+    .grid3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: #fff; border: 1px solid #ddd; border-radius: 8px;
+      padding: 1rem; text-align: center; transition: 0.3s;
+    }
+    .card img {
+      width: 100%; border-radius: 6px; margin-bottom: 0.5rem;
+    }
+    .card:hover img {
+      transform: scale(1.05);
+      transition: transform 0.3s;
+    }
+    .btn {
+      background: #00bcd4; color: #fff; border: none;
+      padding: 0.5rem 1rem; margin-top: 0.5rem;
+      border-radius: 4px; cursor: pointer;
+    }
+
+    .flex-info {
+      display: flex; gap: 2rem; margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .flex-info > div {
+      flex: 1 1 300px;
+    }
+    .flex-info img {
+      width: 100%; border-radius: 8px;
+    }
+
+    .news {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .news-card {
+      background: #fff; border-radius: 8px; overflow: hidden; transition: 0.3s;
+    }
+    .news-card img {
+      width: 100%; height: 150px; object-fit: cover;
+      transition: 0.3s;
+    }
+    .news-card:hover img {
+      transform: scale(1.05);
+    }
+    .news-card div {
+      padding: 0.5rem;
+    }
+
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .event {
+      background: #fff; padding: 1rem;
+      border-radius: 6px; text-align: center;
+      border: 1px solid #ccc;
+    }
+
+    .cv {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem; margin-bottom: 2rem;
+      background: #fff; padding: 1rem; border-radius: 8px;
+    }
+    .cv-section {
+      margin-bottom: 1rem;
+    }
+    .cv-section h3 {
+      margin-bottom: 0.5rem;
+    }
+    .cv-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .cv-item span.icon {
+      background: #00bcd4; color: white;
+      padding: 0.3rem 0.6rem; border-radius: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .cv {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📱 Trang bán hàng điện thoại</h2>
+  <div class="grid3">
+    <div class="card">
+      <img src="/images/img8.jpg" alt="">
+      <h4>iPhone 15</h4>
+      <p>25.000.000đ</p>
+      <button class="btn">Mua ngay</button>
+    </div>
+    <div class="card">
+      <img src="/images/img9.jpg" alt="">
+      <h4>Samsung S24</h4>
+      <p>22.000.000đ</p>
+      <button class="btn">Mua ngay</button>
+    </div>
+    <div class="card">
+      <img src="/images/img10.jpg" alt="">
+      <h4>Xiaomi 14</h4>
+      <p>18.000.000đ</p>
+      <button class="btn">Mua ngay</button>
+    </div>
+  </div>
+
+  <h2>✈️ Trang thông tin du lịch</h2>
+  <div class="flex-info">
+    <div>
+      <h3>Đà Lạt mộng mơ</h3>
+      <p>Khám phá thành phố sương mù với không khí mát mẻ, cảnh sắc thiên nhiên tuyệt đẹp.</p>
+    </div>
+    <div><img src="/images/img7.jpg" alt=""></div>
+  </div>
+
+  <h2>📰 Trang tin tức</h2>
+  <div class="news">
+    <div class="news-card">
+      <img src="/images/img3.jpg" alt="">
+      <div>
+        <h4>Tin mới 1</h4>
+        <p>Tóm tắt nội dung bài viết ngắn gọn, thu hút người đọc.</p>
+      </div>
+    </div>
+    <div class="news-card">
+      <img src="/images/img2.jpg" alt="">
+      <div>
+        <h4>Tin mới 2</h4>
+        <p>Bài viết phân tích tình hình thời sự hiện nay.</p>
+      </div>
+    </div>
+    <div class="news-card">
+      <img src="/images/img1.jpg" alt="">
+      <div>
+        <h4>Tin mới 3</h4>
+        <p>Cập nhật công nghệ mới và xu hướng AI năm 2025.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>📆 Trang lịch sự kiện</h2>
+  <div class="calendar">
+    <div class="event">Thứ 2<br>Họp nhóm</div>
+    <div class="event">Thứ 3<br>Thuyết trình</div>
+    <div class="event">Thứ 4<br>Workshop</div>
+    <div class="event">Thứ 5<br>Học online</div>
+    <div class="event">Thứ 6<br>Deadline</div>
+    <div class="event">Thứ 7<br>Du lịch</div>
+    <div class="event">CN<br>Nghỉ ngơi</div>
+  </div>
+
+  <h2>🧑‍💼 Tạo CV cá nhân</h2>
+  <div class="cv">
+    <div>
+      <div class="cv-section">
+        <h3>Thông tin</h3>
+        <div class="cv-item"><span class="icon">👤</span> Vũ Phi Long</div>
+        <div class="cv-item"><span class="icon">📧</span> vuphiilong2k4@gmail.com</div>
+        <div class="cv-item"><span class="icon">📍</span> TP. Hồ Chí Minh</div>
+      </div>
+    </div>
+    <div>
+      <div class="cv-section">
+        <h3>Kinh nghiệm</h3>
+        <div class="cv-item"><span class="icon">💼</span> Thực tập tại FPT</div>
+        <div class="cv-item"><span class="icon">💼</span> Freelance Web Dev</div>
+      </div>
+      <div class="cv-section">
+        <h3>Kỹ năng</h3>
+        <div class="cv-item"><span class="icon">💻</span> HTML, CSS, JS</div>
+        <div class="cv-item"><span class="icon">🛠</span> Git, Figma, React</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

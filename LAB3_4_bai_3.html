@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Biểu mẫu nâng cao</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f0f0f0;
+      padding: 20px;
+    }
+    section {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    input, textarea, button, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background: #2196f3;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1976d2;
+    }
+    .stars {
+      font-size: 24px;
+      color: gold;
+    }
+  </style>
+</head>
+<body>
+
+  <section>
+    <h2>Form Đăng Nhập</h2>
+    <form>
+      <input type="text" placeholder="Tên Đăng Nhập" required>
+      <input type="password" placeholder="Mật Khẩu" required>
+      <button>Đăng Nhập</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Form Khảo Sát Ý Kiến</h2>
+    <form>
+      <p>Bạn thích sản phẩm nào?</p>
+      <label><input type="radio" name="sp"> Sản phẩm A</label>
+      <label><input type="radio" name="sp"> Sản phẩm B</label>
+
+      <p>Bạn quan tâm đến:</p>
+      <label><input type="checkbox"> Tốc độ</label>
+      <label><input type="checkbox"> Thiết kế</label>
+
+      <textarea placeholder="Ý kiến thêm..."></textarea>
+      <button>Gửi</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Form Đặt Bàn Quán Ăn</h2>
+    <form>
+      <input type="datetime-local">
+      <input type="number" placeholder="Số người">
+      <textarea placeholder="Yêu cầu thêm..."></textarea>
+      <button>Đặt bàn</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Form Gửi Phản Hồi</h2>
+    <form>
+      <label>Đánh giá:</label>
+      <div class="stars">★★★★☆</div>
+      <textarea placeholder="Phản hồi..."></textarea>
+      <input type="email" placeholder="Email của bạn">
+      <button>Gửi</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Form Thanh Toán</h2>
+    <form>
+      <input type="text" placeholder="Địa chỉ nhận hàng">
+      <label><input type="radio" name="pttt"> Thanh toán khi nhận</label>
+      <label><input type="radio" name="pttt"> Thẻ tín dụng</label>
+      <button>Thanh toán</button>
+    </form>
+  </section>
+
+</body>
+</html>

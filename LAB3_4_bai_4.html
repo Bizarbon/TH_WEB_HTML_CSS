@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Dự án nhỏ HTML CSS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f8f8f8;
+      padding: 20px;
+    }
+    section {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
+    .product-card {
+      background: #fff;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px #ddd;
+      text-align: center;
+    }
+    .product-card button {
+      background: #4caf50;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+    }
+    .product-card button:hover {
+      background: #388e3c;
+    }
+    .destination img {
+      width: 100%;
+      max-width: 400px;
+      margin: 10px 0;
+      border-radius: 5px;
+    }
+    .news-item img {
+      width: 100%;
+      border-radius: 5px;
+      transition: transform 0.3s;
+    }
+    .news-item img:hover {
+      transform: scale(1.05);
+    }
+    .event-list {
+      list-style: none;
+      padding: 0;
+    }
+    .event {
+      padding: 10px;
+      border-left: 5px solid #aaa;
+      margin: 5px 0;
+    }
+    .event.today {
+      background: #ffeb3b;
+      font-weight: bold;
+    }
+    .cv {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .left, .right {
+      flex: 1;
+      padding: 20px;
+    }
+    .left {
+      background: #e0f7fa;
+    }
+    .right {
+      background: #eeeeee;
+    }
+  </style>
+</head>
+<body>
+
+  <section>
+    <h2>Trang Bán Hàng Điện Thoại</h2>
+    <div class="products">
+      <div class="product-card">
+        <img src="\images\img5.jpg" alt="iPhone" sizes="5">
+        <h4>iPhone 15</h4>
+        <p>25.000.000đ</p>
+        <button>Mua ngay</button>
+      </div>
+      <div class="product-card">
+        <img src="\images\img6.jpg" alt="Samsung">
+        <h4>Galaxy S24</h4>
+        <p>21.000.000đ</p>
+        <button>Mua ngay</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Trang Thông Tin Du Lịch</h2>
+    <div class="destination">
+      <h3>Đà Lạt</h3>
+      <img src="\images\img7.jpg" alt="Dalat">
+      <p>Thành phố ngàn hoa, khí hậu mát mẻ quanh năm.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Trang Tin Tức</h2>
+    <article class="news-item">
+      <h3>Việt Nam thắng lớn tại SEA Games</h3>
+      <img src="https://via.placeholder.com/300x150" alt="Tin tức">
+      <p>Mô tả ngắn về chiến thắng thể thao Việt Nam.</p>
+    </article>
+  </section>
+
+  <section>
+    <h2>Trang Lịch Sự Kiện</h2>
+    <ul class="event-list">
+      <li class="event today">08/06 - Hội chợ hè</li>
+      <li class="event">15/06 - Workshop ảnh</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>CV Cá Nhân</h2>
+    <div class="cv">
+      <div class="left">
+        <h3>Vũ Phi Long</h3>
+        <p><strong>Kỹ năng:</strong> HTML, CSS, JavaScript</p>
+      </div>
+      <div class="right">
+        <h3>Học vấn</h3>
+        <p>Đại học Công Nghiệp TP.Hồ Chí Minh - Công nghệ thông tin</p>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

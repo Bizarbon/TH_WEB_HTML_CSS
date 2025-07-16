@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Form nâng cao</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; padding: 2rem; background: #f4f4f4; color: #333; }
+    h2 { margin: 1.5rem 0 0.5rem; }
+
+    input, textarea, select, button {
+      padding: 0.5rem; width: 100%; border: 1px solid #ccc;
+      border-radius: 4px; font-size: 1rem;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: #00bcd4; outline: none;
+    }
+    button {
+      background: #00bcd4; color: white; cursor: pointer; transition: 0.3s;
+    }
+    button:hover { background: #0097a7; }
+
+    /* Form đăng nhập */
+    .form-login {
+        margin : center
+      display: flex; justify-content: center; align-items: center;
+      height: 30vh;
+    }
+    .login-box {
+      background: #fff; padding: 2rem; border-radius: 8px; width: 100%; max-width: 300px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .login-box button { width: 100%; margin-top: 1rem; }
+
+    /* Form khảo sát */
+    .survey { background: #fff; padding: 1rem; border-radius: 8px; margin-bottom: 2rem; }
+    .survey .options {
+      display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;
+    }
+
+    /* Form đặt bàn */
+    .booking {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; background: #fff; padding: 1rem; border-radius: 8px; margin-bottom: 2rem;
+    }
+
+    /* Form phản hồi */
+    .feedback {
+      display: grid; gap: 1rem; background: #fff; padding: 1rem; border-radius: 8px; margin-bottom: 2rem;
+    }
+    .stars {
+      display: flex; gap: 0.5rem; font-size: 1.5rem; color: gold;
+    }
+
+    /* Form thanh toán */
+    .checkout {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem; background: #fff; padding: 1rem; border-radius: 8px;
+    }
+    label { display: block; margin: 0.5rem 0 0.25rem; }
+
+  </style>
+</head>
+<body>
+
+  <h2>Form đăng nhập</h2>
+  <div class="form-login">
+    <form class="login-box">
+      <label>Email</label>
+      <input type="email" required>
+      <label>Mật khẩu</label>
+      <input type="password" required>
+      <button>Đăng nhập</button>
+    </form>
+  </div>
+
+  <h2>Form khảo sát ý kiến</h2>
+  <form class="survey">
+    <label>Bạn thích học môn nào?</label>
+    <div class="options">
+      <label><input type="radio" name="mon" /> Web</label>
+      <label><input type="radio" name="mon" /> Python</label>
+      <label><input type="radio" name="mon" /> CSDL</label>
+    </div>
+    <label>Ngôn ngữ đã học:</label>
+    <div class="options">
+      <label><input type="checkbox" /> HTML</label>
+      <label><input type="checkbox" /> CSS</label>
+      <label><input type="checkbox" /> JS</label>
+    </div>
+    <label>Ý kiến khác:</label>
+    <textarea rows="3"></textarea>
+    <button>Gửi</button>
+  </form>
+
+  <h2>Form đặt bàn quán ăn</h2>
+  <form class="booking">
+    <div>
+      <label>Ngày</label>
+      <input type="date">
+      <label>Giờ</label>
+      <input type="time">
+      <label>Số người</label>
+      <input type="number" min="1" max="20">
+    </div>
+    <div>
+      <label>Yêu cầu đặc biệt</label>
+      <textarea rows="5"></textarea>
+      <button style="margin-top: 1rem;">Đặt bàn</button>
+    </div>
+  </form>
+
+  <h2>Form gửi phản hồi</h2>
+  <form class="feedback">
+    <label>Họ tên</label>
+    <input type="text">
+    <label>Email</label>
+    <input type="email">
+    <label>Đánh giá</label>
+    <div class="stars">
+      ★ ★ ★ ★ ☆
+    </div>
+    <label>Phản hồi</label>
+    <textarea rows="4"></textarea>
+    <button>Gửi phản hồi</button>
+  </form>
+
+  <h2>Form thanh toán đơn hàng</h2>
+  <form class="checkout">
+    <div>
+      <label>Họ tên</label>
+      <input type="text">
+      <label>Địa chỉ</label>
+      <input type="text">
+      <label>SĐT</label>
+      <input type="tel">
+    </div>
+    <div>
+      <label>Hình thức thanh toán</label>
+      <select>
+        <option>Chuyển khoản</option>
+        <option>COD</option>
+        <option>Momo</option>
+      </select>
+      <label>Ghi chú</label>
+      <textarea rows="3"></textarea>
+      <button style="margin-top: 1rem;">Thanh toán</button>
+    </div>
+  </form>
+
+</body>
+</html>
