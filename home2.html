@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input type="text" id="name" placeholder="Nhập tên">
+    <button id="btnWeb">Click</button>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById("btnWeb").onclick = function() {
+            const name = document.getElementById("name").value;
+            const resultDiv = document.getElementById("result");
+
+            if (name) {
+                resultDiv.innerHTML = "Hello " + name;
+            } else {
+                resultDiv.innerHTML = "Bạn chưa nhập tên.";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
