@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Kiểm tra kết thúc thực hành</title>
+    <style>
+        body { 
+            font-family: Arial; 
+            margin: 20px; 
+            background-color: #f5f5f5;
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        input { 
+            width: 350px; 
+            padding: 8px; 
+            margin-right: 10px; 
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button { 
+            padding: 8px 15px; 
+            background: #007bff; 
+            color: white; 
+            border: none; 
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .success { 
+            color: green; 
+            font-weight: bold; 
+        }
+        .error { 
+            color: red; 
+            font-weight: bold; 
+        }
+        .final { 
+            text-align: center; 
+            margin-top: 30px; 
+            background: #e9ecef; 
+            padding: 20px; 
+            border-radius: 8px;
+        }
+        .final button {
+            background: #28a745;
+            font-size: 16px;
+            padding: 12px 25px;
+        }
+        .final button:hover {
+            background: #1e7e34;
+        }
+        br { 
+            margin-bottom: 15px; 
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Kiểm tra kết thúc thực hành</h2>
+
+    <div class="input-group">
+        <!-- 1. Kiểm tra text vừa nhập vào là số hay chữ, thông báo lên trang web -->
+        <input type="text" id="textInput" placeholder="Nhập text để kiểm tra số hay chữ">
+        <button onclick="validateTextInput()">Check Text</button>
+        <span id="msg1"></span>
+    </div>
+
+    <div class="input-group">
+        <!-- 2. Kiểm tra ngày nhập vào (DD-MM-YYYY) -->
+        <input type="text" id="date1" placeholder="Nhập ngày DD-MM-YYYY">
+        <button onclick="validateDate1()">Check Date1</button>
+        <span id="msg2"></span>
+    </div>
+
+    <div class="input-group">
+        <!-- 3. Kiểm tra ngày nhập vào (DD-MM-YYYY) -->
+        <input type="text" id="date2" placeholder="Nhập ngày DD-MM-YYYY">
+        <button onclick="validateDate2()">Check Date2</button>
+        <span id="msg3"></span>
+    </div>
+
+    <div class="input-group">
+        <!-- 4. Kết hợp 2 ngày nhập vào để đúng điều có thể nhập (DD-MM-YYYY) hoặc (DD/MM/YYYY) -->
+        <input type="text" id="date3" placeholder="Nhập ngày DD-MM-YYYY hoặc DD/MM/YYYY">
+        <button onclick="validateDate3()">Check Date3</button>
+        <span id="msg4"></span>
+    </div>
+
+    <div class="input-group">
+        <!-- 5. Họ tên -->
+        <input type="text" id="fullname" placeholder="Nhập họ tên không chứa số/ký tự đặc biệt">
+        <button onclick="validateFullname()">Check Họ Tên</button>
+        <span id="msg5"></span>
+    </div>
+
+    <div class="input-group">
+        <!-- 6. Mã Bệnh Nhân BN-20230701-001 -->
+        <input type="text" id="postal" placeholder="Nhập Mã Bệnh Nhân">
+        <button onclick="validatePostal()">Check Mã Bệnh Nhân</button>
+        <span id="msg6"></span>
+    </div>
+
+    <div class="input-group">
+        <!-- 7. Số điện thoại -->
+        <input type="text" id="phone" placeholder="Nhập số điện thoại Việt Nam">
+        <button onclick="validatePhone()">Check Số Điện Thoại</button>
+        <span id="msg7"></span>
+    </div>
+
+    <div class="input-group">
+        <!-- 8. Căn cước công dân (là 9 hoặc 12 số) -->
+        <input type="text" id="card" placeholder="Nhập số thẻ căn cước công dân">
+        <button onclick="validateCard()">Check CCCD</button>
+        <span id="msg8"></span>
+    </div>
+
+    <div class="input-group">
+        <!-- 9. Mật khẩu -->
+        <input type="text" id="password" placeholder="Nhập mật khẩu an toàn">
+        <button onclick="validatePassword()">Check Password</button>
+        <span id="msg9"></span>
+    </div>
+
+    <div class="input-group">
+        <!-- 10. Email -->
+        <input type="text" id="email" placeholder="Nhập email">
+        <button onclick="validateEmail()">Check Email</button>
+        <span id="msg10"></span>
+    </div>
+
+    <!-- 11. Kiểm tra tất cả 10 điều kiện -->
+    <div class="final">
+        <button onclick="checkAll10Conditions()">Kiểm tra tất cả 10 điều kiện</button><br><br>
+        <span id="msg11"></span>
+    </div>
+
+    <script>
+        function setMsg(id, valid, text) {
+            let msg = document.getElementById(id);
+            msg.textContent = text;
+            msg.className = valid ? 'success' : 'error';
+        }
+
+        // 1. Kiểm tra text vừa nhập vào là số hay chữ, thông báo lên trang web
+        function validateTextInput() {
+            let val = document.getElementById('textInput').value;
+            if (val.trim() === '') {
+                setMsg('msg1', false, 'Vui lòng nhập dữ liệu');
+                return;
+            }
+
+            if (!isNaN(val) && !isNaN(parseFloat(val)) && val.trim() !== '') {
+                setMsg('msg1', true, 'Đây là số');
+            } else {
+                setMsg('msg1', true, 'Đây là chữ');
+            }
+        }
+
+        // 2. Kiểm tra ngày nhập vào (DD-MM-YYYY)
+        function validateDate1() {
+            let val = document.getElementById('date1').value;
+            let regex = /^([0-9]{2})[\/-]([0-9]{2})[\/-]([0-9]{4})$/;
+            setMsg('msg2', regex.test(val), regex.test(val) ? 'Hợp lệ' : 'Phải là DD-MM-YYYY');
+        }
+
+        // 3. Kiểm tra ngày nhập vào (DD-MM-YYYY)
+        function validateDate2() {
+            let val = document.getElementById('date2').value;
+            let regex = /^([0-1][0-9]|[0-3][0-9])[\/-]([0-1][0-9])[\/-]([0-9]{4})$/;
+            setMsg('msg3', regex.test(val), regex.test(val) ? 'Hợp lệ' : 'Phải là DD-MM-YYYY');
+        }
+
+        // 4. Kết hợp 2 ngày nhập vào để đúng điều có thể nhập (DD-MM-YYYY) hoặc (DD/MM/YYYY)
+        function validateDate3() {
+            let val = document.getElementById('date3').value;
+            let regex1 = /^([0-1][0-9]|[0-3][0-9])[\/-]([0-1][0-9])[\/-]([0-9]{4})$/;
+            let regex2 = /^([0-1][0-9]|[0-3][0-9])[\/]([0-1][0-9])[\/]([0-9]{4})$/;
+            let valid = regex1.test(val) || regex2.test(val);
+            setMsg('msg4', valid, valid ? 'Hợp lệ' : 'Phải là DD-MM-YYYY hoặc DD/MM/YYYY');
+        }
+
+        // 5. Họ tên không chứa số/ký tự đặc biệt
+        function validateFullname() {
+            let val = document.getElementById('fullname').value;
+            let regex = /^[A-Za-zÀ-Ỹ\s]+$/;
+            setMsg('msg5', regex.test(val) && val.trim().length > 0, regex.test(val) ? 'Hợp lệ' : 'Không được chứa số/ký tự đặc biệt');
+        }
+
+        // 6. Mã Bệnh Nhân BN-20230701-001
+        function validatePostal() {
+            let val = document.getElementById('postal').value;
+            let regex = /^BN-\d{8}-\d{3}$/;
+            setMsg('msg6', regex.test(val), regex.test(val) ? 'Hợp lệ' : 'Phải là BN-YYYYMMDD-XXX');
+        }
+
+        // 7. Số điện thoại
+        function validatePhone() {
+            let val = document.getElementById('phone').value;
+            let regex = /^(03|05|07|08|09)[0-9]{8}$/;
+            setMsg('msg7', regex.test(val), regex.test(val) ? 'Hợp lệ' : 'SĐT không hợp lệ');
+        }
+
+        // 8. Số căn cước công dân (là 9 hoặc 12 số)
+        function validateCard() {
+            let val = document.getElementById('card').value.replace(/[\s/]/g, '');
+            let regex = /^\d{9}$|^\d{12}$/;
+            setMsg('msg8', regex.test(val), regex.test(val) ? 'Hợp lệ' : 'Phải 9 hoặc 12 chữ số');
+        }
+
+        // 9. Mật khẩu an toàn
+        function validatePassword() {
+            let val = document.getElementById('password').value;
+            let regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/;
+            setMsg('msg9', regex.test(val), regex.test(val) ? 'Hợp lệ' : 'Mật khẩu chưa đủ mạnh');
+        }
+
+        // 10. Email
+        function validateEmail() {
+            let val = document.getElementById('email').value;
+            let regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+            setMsg('msg10', regex.test(val), regex.test(val) ? 'Hợp lệ' : 'Sai định dạng email');
+        }
+
+        // 11. Kiểm tra tất cả 10 điều kiện (ngắn gọn)
+        function checkAll10Conditions() {
+            const validations = [
+                { id: 'textInput', name: 'Text Input', check: val => val.trim() !== '' },
+                { id: 'date1', name: 'Date1', check: val => /^([0-9]{2})[\/-]([0-9]{2})[\/-]([0-9]{4})$/.test(val) },
+                { id: 'date2', name: 'Date2', check: val => /^([0-1][0-9]|[0-3][0-9])[\/-]([0-1][0-9])[\/-]([0-9]{4})$/.test(val) },
+                { id: 'date3', name: 'Date3', check: val => {
+                    const regex1 = /^([0-1][0-9]|[0-3][0-9])[\/-]([0-1][0-9])[\/-]([0-9]{4})$/;
+                    const regex2 = /^([0-1][0-9]|[0-3][0-9])[\/]([0-1][0-9])[\/]([0-9]{4})$/;
+                    return regex1.test(val) || regex2.test(val);
+                }},
+                { id: 'fullname', name: 'Họ tên', check: val => /^[A-Za-zÀ-Ỹ\s]+$/.test(val) && val.trim().length > 0 },
+                { id: 'postal', name: 'Mã BN', check: val => /^BN-\d{8}-\d{3}$/.test(val) },
+                { id: 'phone', name: 'SĐT', check: val => /^(03|05|07|08|09)[0-9]{8}$/.test(val) },
+                { id: 'card', name: 'CCCD', check: val => /^\d{9}$|^\d{12}$/.test(val.replace(/[\s/]/g, '')) },
+                { id: 'password', name: 'Password', check: val => /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/.test(val) },
+                { id: 'email', name: 'Email', check: val => /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(val) }
+            ];
+
+            let validCount = 0;
+            let invalidFields = [];
+
+            validations.forEach(item => {
+                const value = document.getElementById(item.id).value;
+                if (item.check(value)) {
+                    validCount++;
+                } else {
+                    invalidFields.push(item.name);
+                }
+            });
+
+            const allValid = validCount === validations.length;
+            if (allValid) {
+                setMsg('msg11', true, `🎉 HOÀN THÀNH! Tất cả 10 điều kiện đều hợp lệ! (${validCount}/10)`);
+            } else {
+                setMsg('msg11', false, `❌ Còn lỗi: ${invalidFields.join(', ')} | Hợp lệ: ${validCount}/10`);
+            }
+        }
+    </script>
+</body>
+</html>

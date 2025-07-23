@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .error { color: red; }
+    .success { color: green; }
+  </style>
+</head>
+<body>
+  <h2>Bài 1,2,3: Hello Name</h2>
+  <input type="text" id="nameInput" placeholder="Nhập tên">
+  <button onclick="sayHello()">Say Hello</button>
+  <div id="helloOutput"></div>
+
+
+  <script>
+    function sayHello() {
+      const name = document.getElementById('nameInput').value.trim();
+      const output = document.getElementById('helloOutput');
+
+      if (!name) {
+        alert("Chưa nhập tên");
+        output.textContent = "";
+        return;
+      }
+
+      console.log("Hello " + name.split(' ').pop());
+      output.textContent = "Hello " + name.split(' ').pop();
+
+      if (!isNaN(name)) {
+        alert("Bạn vừa nhập số");
+      } else {
+        alert("Bạn vừa nhập text");
+      }
+    }
+    function sumNumbers() {
+      const n1 = document.getElementById('num1').value.trim();
+      const n2 = document.getElementById('num2').value.trim();
+      const out = document.getElementById('sumOutput');
+
+    }
+
+  </script>
+</body>
+</html>
