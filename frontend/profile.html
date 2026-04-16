@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ sơ cá nhân - ShopMini</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 992px) {
+            .profile-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Lai lịch Card */
+        .bio-card {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .profile-avatar-large {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.3);
+            border: 4px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+        }
+
+        .role-admin { background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .role-member { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+
+        .bio-info { margin-top: 2rem; text-align: left; }
+        .bio-row { display: flex; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .bio-label { color: var(--text-muted); font-size: 0.9rem; }
+        .bio-value { font-weight: 600; }
+
+        /* Form Card */
+        .settings-card { padding: 2.5rem; }
+        .settings-card h3 { margin-bottom: 2rem; display: flex; align-items: center; gap: 0.75rem; }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+        @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+
+        .btn-save {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            width: auto;
+            padding: 1rem 2.5rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <h1 onclick="window.location.href='index.html'" style="cursor:pointer">🛒 ShopMini</h1>
+        <ul id="main-navbar">
+            <li class="admin-only"><a href="admin/products.html">Sản phẩm</a></li>
+            <li class="admin-only"><a href="admin/customers.html">Khách hàng</a></li>
+            <li class="admin-only"><a href="admin/orders.html">Đặt hàng</a></li>
+            <li class="admin-only"><a href="admin/finance.html">Chi phí</a></li>
+            <li id="nav-auth-section" style="margin-left: auto;"></li>
+        </ul>
+    </nav>
+    <script src="js/animations.js"></script>
+    <script src="js/auth.js"></script>
+
+    <div class="container fade-in">
+        <div class="page-header reveal">
+            <h2>👤 Hồ sơ cá nhân</h2>
+            <p>Quản lý thông tin tài khoản và thiết lập bảo mật của bạn</p>
+        </div>
+
+        <div class="profile-grid">
+            <!-- Left: Bio Card -->
+            <div class="bio-card glass-card reveal">
+                <div class="profile-avatar-large" id="profileInitial">-</div>
+                <h2 id="profileName" style="margin-bottom: 0.5rem;">Carging...</h2>
+                <p id="profileUsername" style="color: var(--text-muted);">@username</p>
+                <div id="profileRoleBadge" class="role-badge">Đang tải...</div>
+
+                <div class="bio-info">
+                    <div class="bio-row">
+                        <span class="bio-label">Ngày gia nhập</span>
+                        <span class="bio-value" id="profileJoinDate">---</span>
+                    </div>
+                    <div class="bio-row">
+                        <span class="bio-label">Trạng thái</span>
+                        <span class="bio-value" style="color: var(--success);">🔥 Đang hoạt động</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Settings Card -->
+            <div class="settings-card glass-card reveal">
+                <h3>⚙️ Chỉnh sửa thông tin</h3>
+                <form id="profileForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Họ và tên</label>
+                            <input type="text" id="pName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Số điện thoại</label>
+                            <input type="text" id="pPhone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Địa chỉ Email</label>
+                        <input type="email" id="pEmail">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Địa chỉ nhận hàng</label>
+                        <input type="text" id="pAddress">
+                    </div>
+
+                    <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.05); margin: 2rem 0;">
+                    
+                    <h3>🔐 Bảo mật</h3>
+                    <div class="form-group">
+                        <label>Mật khẩu mới (Để trống nếu không muốn đổi)</label>
+                        <input type="password" id="pPassword" placeholder="••••••••">
+                    </div>
+
+                    <div style="text-align: right;">
+                        <button type="submit" class="btn-primary btn-save">💾 Lưu thay đổi</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/profile.js"></script>
+</body>
+
+</html>

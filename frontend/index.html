@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cửa hàng Online Mini</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Category Navigation */
+        .category-nav {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .category-btn {
+            padding: 0.55rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            background: rgba(30, 41, 59, 0.6);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .category-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary-light);
+            background: rgba(99, 102, 241, 0.1);
+            transform: none;
+            box-shadow: none;
+        }
+
+        .category-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+        }
+
+        .category-btn.active:hover {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: white;
+        }
+
+        /* Category Section */
+        .category-section {
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .category-header h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .category-count {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: rgba(99, 102, 241, 0.1);
+            padding: 0.25rem 0.7rem;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+
+        /* Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(6, 182, 212, 0.1));
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-banner h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-banner p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Search bar */
+        .search-bar {
+            position: relative;
+            margin-bottom: 1.5rem;
+            max-width: 500px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.8rem;
+            border-radius: 50px;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .search-bar input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+
+        .search-bar::before {
+            content: '🔍';
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1rem;
+        }
+        .admin-only {
+            display: none !important;
+        }
+
+        .btn-dashboard {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+            transition: 0.3s;
+        }
+
+        .btn-dashboard:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <h1 onclick="window.location.href='index.html'" style="cursor:pointer">🛒 ShopMini</h1>
+        <ul id="main-navbar">
+            <li class="admin-only"><a href="admin/products.html">Sản phẩm</a></li>
+            <li class="admin-only"><a href="admin/customers.html">Khách hàng</a></li>
+            <li class="admin-only"><a href="admin/orders.html">Đặt hàng</a></li>
+            <li class="admin-only"><a href="admin/finance.html">Chi phí</a></li>
+            <li class="admin-only"><a href="admin/suppliers.html">Nhà CC</a></li>
+            <li id="nav-auth-section" style="margin-left: auto;"></li>
+        </ul>
+    </nav>
+    <script src="js/animations.js"></script>
+    <script src="js/auth.js"></script>
+
+    <div class="container fade-in">
+        <!-- Hero Banner -->
+        <div class="hero-banner reveal">
+            <h2>🛍️ Chào mừng đến với ShopMini</h2>
+            <p>Khám phá hàng ngàn sản phẩm công nghệ chính hãng với giá tốt nhất</p>
+            <a href="admin/products.html" class="btn-dashboard admin-only">
+                <span>⚙️ Quản lý hệ thống</span>
+            </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid reveal" id="statsGrid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+            <div class="stat-card">
+                <div class="stat-icon">💵</div>
+                <div class="stat-value" id="statRevenue" style="color:var(--success)">0 đ</div>
+                <div class="stat-label">Doanh thu</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📈</div>
+                <div class="stat-value" id="statProfit" style="color:var(--primary-light)">0 đ</div>
+                <div class="stat-label">Lợi nhuận ròng</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📦</div>
+                <div class="stat-value" id="statProducts">0</div>
+                <div class="stat-label">Sản phẩm</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-value" id="statCustomers">0</div>
+                <div class="stat-label">Khách hàng</div>
+            </div>
+        </div>
+
+        <div class="flex-layout">
+            <!-- LEFT: SẢN PHẨM -->
+            <div class="main-content">
+                <!-- Search -->
+                <div class="search-bar reveal">
+                    <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." oninput="filterProducts()">
+                </div>
+
+                <!-- Category Filter -->
+                <div class="category-nav reveal" id="categoryNav"></div>
+
+                <!-- Product Sections by Category -->
+                <div id="productSections" class="reveal"></div>
+            </div>
+
+            <!-- RIGHT: GIỎ HÀNG -->
+            <div class="sidebar">
+                <div class="cart-section reveal glass-card">
+                    <h2>🛒 Giỏ hàng</h2>
+
+                    <div id="customerSelectionGroup" class="form-group" style="display: none;">
+                        <label>Chọn khách hàng</label>
+                        <select id="customerSelect" class="customer-select"></select>
+                    </div>
+
+                    <div id="loginToOrderPrompt" style="padding: 1rem; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; color: #f87171; margin-bottom: 1rem; text-align: center; font-size: 0.9rem;">
+                        ⚠️ Vui lòng <a href="login.html" style="color: white; font-weight: 600;">Đăng nhập</a> để đặt hàng
+                    </div>
+
+                    <div class="form-group" style="margin-top: 1rem;">
+                        <label>Phương thức thanh toán</label>
+                        <select id="paymentMethod" class="customer-select" style="margin-top: 0.5rem; width: 100%; padding: 0.8rem; border-radius: 8px; border: 1px solid var(--border); font-family: inherit;">
+                            <option value="ShipCOD">Thanh toán khi nhận hàng (ShipCOD)</option>
+                            <option value="Thanh toán trước">Chuyển khoản (Thanh toán trước)</option>
+                            <option value="Trả góp">Trả góp</option>
+                        </select>
+                    </div>
+
+                    <div class="cart-wrapper">
+                        <div id="cartList"></div>
+                    </div>
+
+                    <div class="cart-total" id="cartTotal" style="display:none;">
+                        <span>Tổng cộng:</span>
+                        <span class="amount" id="total">0 đ</span>
+                    </div>
+
+                    <button class="btn-checkout" onclick="createOrder()">✨ Đặt hàng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+        <div class="footer-top">
+            <!-- Brand -->
+            <div class="footer-brand footer-col">
+                <div class="footer-logo">🛒 ShopMini</div>
+                <p>Nền tảng mua sắm công nghệ hàng đầu Việt Nam. Sản phẩm chính hãng, giá tốt, giao hàng nhanh toàn
+                    quốc.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-btn" title="Facebook">📘</a>
+                    <a href="#" class="social-btn" title="Instagram">📷</a>
+                    <a href="#" class="social-btn" title="YouTube">▶️</a>
+                    <a href="#" class="social-btn" title="TikTok">🎵</a>
+                    <a href="#" class="social-btn" title="Zalo">💬</a>
+                </div>
+                <div class="payment-badges">
+                    <span class="payment-badge">💳 Visa</span>
+                    <span class="payment-badge">💳 MasterCard</span>
+                    <span class="payment-badge">📱 MoMo</span>
+                    <span class="payment-badge">🏦 ZaloPay</span>
+                    <span class="payment-badge">💵 COD</span>
+                </div>
+            </div>
+
+            <!-- Danh mục -->
+            <div class="footer-col">
+                <h4>Danh mục</h4>
+                <ul>
+                    <li><a href="index.html?category=Điện thoại#productSections">📱 Điện thoại</a></li>
+                    <li><a href="index.html?category=Laptop#productSections">💻 Laptop</a></li>
+                    <li><a href="index.html?category=Tablet#productSections">📋 Tablet</a></li>
+                    <li><a href="index.html?category=Tai nghe#productSections">🎧 Tai nghe</a></li>
+                    <li><a href="index.html?category=Đồng hồ thông minh#productSections">⌚ Đồng hồ thông minh</a></li>
+                    <li><a href="index.html?category=Phụ kiện#productSections">🔌 Phụ kiện</a></li>
+                </ul>
+            </div>
+
+            <!-- Hỗ trợ -->
+            <div class="footer-col">
+                <h4>Hỗ trợ</h4>
+                <ul>
+                    <li><a href="pages/faq.html">❓ Câu hỏi thường gặp</a></li>
+                    <li><a href="pages/return-policy.html">🔄 Chính sách đổi trả</a></li>
+                    <li><a href="pages/warranty.html">🛡️ Bảo hành sản phẩm</a></li>
+                    <li><a href="pages/shipping.html">🚚 Chính sách vận chuyển</a></li>
+                    <li><a href="pages/privacy.html">🔒 Chính sách bảo mật</a></li>
+                    <li><a href="admin/orders.html">📋 Theo dõi đơn hàng</a></li>
+                </ul>
+            </div>
+
+            <!-- Liên hệ & Newsletter -->
+            <div class="footer-col footer-newsletter">
+                <h4>Liên hệ</h4>
+                <ul class="footer-contact-list">
+                    <li>
+                        <span class="contact-icon">📍</span>
+                        <span>Số 4 Nguyễn Văn Bảo, Q.Gò Vấp, TP.HCM</span>
+                    </li>
+                    <li>
+                        <span class="contact-icon">📞</span>
+                        <span>1234 5678 (Miễn phí, 8h–22h)</span>
+                    </li>
+                    <li>
+                        <span class="contact-icon">✉️</span>
+                        <span>vuphilong@shopmini.vn</span>
+                    </li>
+                    <li>
+                        <span class="contact-icon">🕐</span>
+                        <span>Thứ 2 – Chủ nhật: 8:00 – 22:00</span>
+                    </li>
+                </ul>
+                <br>
+                <h4>Nhận ưu đãi</h4>
+                <p>Đăng ký nhận tin để nhận ngay voucher 50K cho đơn hàng đầu tiên!</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Email của bạn..." id="newsletterEmail">
+                    <button onclick="subscribeNewsletter()">Đăng ký</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-left">
+                © 2026 ShopMini. Made with <span>❤️</span> in Vietnam. Tất cả quyền được bảo lưu.
+            </div>
+            <div class="footer-bottom-right">
+                <a href="pages/terms.html">Điều khoản sử dụng</a>
+                <a href="pages/privacy.html">Chính sách bảo mật</a>
+                <a href="pages/cookie.html">Cookie</a>
+                <a href="https://www.google.com/maps/search/Trường+Đại+học+Công+nghiệp+TP.HCM" target="_blank" title="Bản đồ IUH">Sitemap</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let allProducts = [];
+        let activeCategory = 'all';
+
+        const categoryIcons = {
+            'Điện thoại': '📱',
+            'Laptop': '💻',
+            'Tablet': '📋',
+            'Tai nghe': '🎧',
+            'Đồng hồ thông minh': '⌚',
+            'Phụ kiện': '🔌'
+        };
+
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.add('show');
+                setTimeout(() => toast.remove(), 3000);
+            }, 100);
+        }
+
+        async function loadStats() {
+            if (!auth.isAdmin()) return;
+            try {
+                const [cRes, summaryRes] = await Promise.all([
+                    fetch(`${API_URL}/customers`, { headers: auth.getHeaders() }),
+                    fetch(`${API_URL}/expenses/summary`, { headers: auth.getHeaders() })
+                ]);
+                const customers = await cRes.json();
+                const summary = await summaryRes.json();
+
+                if (document.getElementById('statProducts')) document.getElementById('statProducts').textContent = allProducts.length;
+                if (document.getElementById('statCustomers')) document.getElementById('statCustomers').textContent = customers.length;
+                if (document.getElementById('statRevenue')) document.getElementById('statRevenue').textContent = (summary.revenue || 0).toLocaleString('vi-VN') + ' đ';
+                if (document.getElementById('statProfit')) document.getElementById('statProfit').textContent = (summary.profit || 0).toLocaleString('vi-VN') + ' đ';
+            } catch (e) { console.error('Stats error:', e); }
+        }
+
+        async function loadProducts() {
+            try {
+                const res = await fetch(`${API_URL}/products`);
+                allProducts = await res.json();
+                renderCategoryNav();
+                renderProducts();
+                if (auth.isAdmin()) loadStats();
+            } catch (err) {
+                console.error('Products error:', err);
+                showToast('Lỗi kết nối server', 'error');
+            }
+        }
+
+        function renderCategoryNav() {
+            const categories = [...new Set(allProducts.map(p => p.category))];
+            const nav = document.getElementById('categoryNav');
+            if(!nav) return;
+            nav.innerHTML = `
+                <button class="category-btn ${activeCategory === 'all' ? 'active' : ''}" onclick="setCategory('all')">🏪 Tất cả</button>
+                ${categories.map(cat => `
+                    <button class="category-btn ${activeCategory === cat ? 'active' : ''}" onclick="setCategory('${cat}')">
+                        ${categoryIcons[cat] || '📦'} ${cat}
+                    </button>`).join('')}`;
+        }
+
+        function setCategory(cat) { activeCategory = cat; renderCategoryNav(); renderProducts(); }
+        function filterProducts() { renderProducts(); }
+
+        function renderProducts() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const sections = document.getElementById('productSections');
+            if(!sections) return;
+            let filtered = allProducts;
+            if (searchTerm) {
+                filtered = filtered.filter(p => p.name.toLowerCase().includes(searchTerm) || p.description.toLowerCase().includes(searchTerm) || p.category.toLowerCase().includes(searchTerm));
+            }
+            if (activeCategory !== 'all') filtered = filtered.filter(p => p.category === activeCategory);
+            const grouped = {};
+            filtered.forEach(p => { if (!grouped[p.category]) grouped[p.category] = []; grouped[p.category].push(p); });
+            if (Object.keys(grouped).length === 0) {
+                sections.innerHTML = '<div class="empty-state">🔍<p>Không tìm thấy sản phẩm</p></div>';
+                return;
+            }
+            sections.innerHTML = Object.entries(grouped).map(([category, products]) => `
+                <div class="category-section">
+                    <div class="category-header">
+                        <h3>${categoryIcons[category] || '📦'} ${category}</h3>
+                        <span class="category-count">${products.length} sản phẩm</span>
+                    </div>
+                    <div class="product-grid">
+                        ${products.map(p => `
+                            <div class="product-card fade-in">
+                                <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/400x200?text=No+Image'">
+                                <div class="card-body">
+                                    <span class="category-badge">${p.category}</span>
+                                    <h3 title="${p.name}">${p.name}</h3>
+                                    <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.5rem; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${p.description}</p>
+                                    <p class="price">${p.price.toLocaleString('vi-VN')} đ</p>
+                                    <p class="stock-info">Kho: <span>${p.stock}</span></p>
+                                    <button class="btn-add-cart" onclick="addToCart('${p._id}')">🛒 Thêm giỏ</button>
+                                </div>
+                            </div>`).join('')}
+                    </div>
+                </div>`).join('');
+        }
+
+        async function loadCustomers() {
+            try {
+                const res = await fetch(`${API_URL}/customers`, { headers: auth.getHeaders() });
+                if (!res.ok) return;
+                const customers = await res.json();
+                const select = document.getElementById('customerSelect');
+                if(select) select.innerHTML = '<option value="">-- Chọn khách hàng --</option>' + customers.map(c => `<option value="${c._id}">${c.name} - ${c.phone}</option>`).join('');
+            } catch (e) {}
+        }
+
+        function addToCart(id) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const item = cart.find(i => String(i.productId) === String(id));
+            if (item) item.quantity++; else cart.push({ productId: id, quantity: 1 });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+            showToast('Đã thêm vào giỏ hàng!');
+        }
+
+        async function renderCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartDiv = document.getElementById('cartList');
+            const cartTotal = document.getElementById('cartTotal');
+            if(!cartDiv) return;
+            if (cart.length === 0) {
+                cartDiv.innerHTML = '<div class="cart-empty">🛒 Giỏ hàng trống</div>';
+                if(cartTotal) cartTotal.style.display = 'none';
+                return;
+            }
+            let html = ''; let total = 0;
+            for (let item of cart) {
+                const p = allProducts.find(x => String(x._id) === String(item.productId));
+                if (p) {
+                    total += p.price * item.quantity;
+                    html += `
+                    <div class="cart-item">
+                        <div><div class="cart-item-name">${p.name}</div><div class="cart-item-price">${p.price.toLocaleString('vi-VN')} đ</div></div>
+                        <div class="cart-item-controls">
+                            <button onclick="changeQty('${item.productId}', -1)">−</button>
+                            <span class="qty">${item.quantity}</span>
+                            <button onclick="changeQty('${item.productId}', 1)">+</button>
+                            <button class="btn-remove" onclick="removeItem('${item.productId}')">✕</button>
+                        </div>
+                    </div>`;
+                }
+            }
+            cartDiv.innerHTML = html;
+            if(cartTotal) { cartTotal.style.display = 'flex'; document.getElementById('total').textContent = total.toLocaleString('vi-VN') + ' đ'; }
+        }
+
+        function changeQty(id, delta) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const item = cart.find(i => String(i.productId) === String(id));
+            if (!item) return;
+            item.quantity += delta;
+            if (item.quantity <= 0) cart = cart.filter(i => String(i.productId) !== String(id));
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+        }
+
+        function removeItem(id) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart = cart.filter(i => String(i.productId) !== String(id));
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+            showToast('Đã xóa khỏi giỏ hàng');
+        }
+
+        async function createOrder() {
+            if (!auth.isLoggedIn()) { showToast('Vui lòng đăng nhập!', 'error'); setTimeout(() => window.location.href = 'login.html', 1500); return; }
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) { showToast('Giỏ hàng trống!', 'error'); return; }
+            const products = cart.map(item => {
+                const p = allProducts.find(x => String(x._id) === String(item.productId));
+                return p ? { product: p._id, quantity: item.quantity, price: p.price } : null;
+            }).filter(x => x);
+            const total = products.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0);
+            const pm = document.getElementById('paymentMethod').value;
+            const csId = document.getElementById('customerSelect')?.value || null;
+            try {
+                const res = await fetch(`${API_URL}/orders`, {
+                    method: 'POST',
+                    headers: auth.getHeaders(),
+                    body: JSON.stringify({ customer: auth.isAdmin() ? csId : null, products, totalAmount: total, paymentMethod: pm })
+                });
+                
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.message || 'Lỗi đặt hàng');
+                }
+
+                showToast('🎉 Đặt hàng thành công!');
+                localStorage.removeItem('cart');
+                renderCart();
+                loadProducts(); // Cập nhật lại tồn kho hiển thị trên gallery
+                if (auth.isAdmin()) loadStats();
+            } catch (err) { 
+                showToast(err.message, 'error'); 
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const loginPrompt = document.getElementById('loginToOrderPrompt');
+            const customerGroup = document.getElementById('customerSelectionGroup');
+            if (auth.isLoggedIn()) {
+                if(loginPrompt) loginPrompt.style.display = 'none';
+                if (auth.isAdmin()) { if (customerGroup) customerGroup.style.display = 'block'; loadCustomers(); }
+            } else {
+                if (loginPrompt) loginPrompt.style.display = 'block';
+                if (customerGroup) customerGroup.style.display = 'none';
+            }
+            if (!auth.isAdmin()) {
+                const rev = document.querySelector('.stat-card:nth-child(1)');
+                const pro = document.querySelector('.stat-card:nth-child(2)');
+                if(rev) rev.style.display = 'none';
+                if(pro) pro.style.display = 'none';
+            }
+            loadProducts();
+            renderCart();
+        });
+    </script>
+</body>
+
+</html>

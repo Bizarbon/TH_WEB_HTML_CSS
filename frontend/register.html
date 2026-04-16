@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký - ShopMini Premium</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-glow: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.15), transparent);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #020617;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--primary-glow);
+            z-index: -1;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 440px;
+            position: relative;
+        }
+
+        .auth-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 32px;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            margin-top: 1rem;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .auth-header h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .auth-header p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.6rem;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding-left: 0.2rem;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            color: white;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+
+        .input-wrapper input:focus {
+            outline: none;
+            border-color: #6366f1;
+            background: rgba(30, 41, 59, 0.8);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+        }
+
+        .btn-auth {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-auth:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+            filter: brightness(1.1);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        .auth-footer a {
+            color: #818cf8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .toast {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            color: white;
+            transform: translateX(150%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 10000;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .toast.show { transform: translateX(0); }
+        .toast-success { background: #059669; }
+        .toast-error { background: #dc2626; }
+    </style>
+</head>
+
+<body>
+    <div class="auth-container reveal">
+        <div style="text-align: center;">
+            <h1 role="button" tabindex="0" onclick="window.location.href='index.html'"
+                style="cursor:pointer; font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem; background: linear-gradient(135deg, #fff, #818cf8); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                🛒 ShopMini</h1>
+        </div>
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>Tham gia ngay ✨</h1>
+                <p>Mua sắm công nghệ đỉnh cao cùng ShopMini</p>
+            </div>
+
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Họ và tên</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="name" placeholder="Ví dụ: Vũ Phi Long" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Số điện thoại</label>
+                    <div class="input-wrapper">
+                        <input type="tel" id="phone" placeholder="09xxxxxxxx" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email (Không bắt buộc)</label>
+                    <div class="input-wrapper">
+                        <input type="email" id="email" placeholder="example@gmail.com">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Địa chỉ (Không bắt buộc)</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="address" placeholder="Nhập địa chỉ của bạn...">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Tên đăng nhập</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="username" placeholder="Ví dụ: philong23" required autocomplete="username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu (Ít nhất 6 ký tự)</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" placeholder="••••••••" required minlength="6" autocomplete="new-password">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-auth" id="submitBtn">Tạo tài khoản</button>
+            </form>
+
+            <div class="auth-footer">
+                Đã có tài khoản? <a href="login.html">Đăng nhập ngay</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/animations.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.innerHTML = (type === 'success' ? '✅ ' : '❌ ') + `<span>${message}</span>`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.classList.add('show'), 100);
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 400);
+            }, 3000);
+        }
+
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const username = document.getElementById('username').value.trim();
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const address = document.getElementById('address').value.trim();
+            const password = document.getElementById('password').value;
+
+            btn.disabled = true;
+            btn.textContent = 'Đang xử lý...';
+
+            try {
+                const res = await fetch(`${API_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, name, phone, email, address, password })
+                });
+
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.message || 'Lỗi đăng ký');
+
+                showToast('Đăng ký tài khoản thành công!');
+
+                const authCard = document.querySelector('.auth-card');
+                authCard.innerHTML = `
+                    <div style="text-align: center; padding: 2rem 0;">
+                        <div style="font-size: 4rem; margin-bottom: 1.5rem;">🎉</div>
+                        <h2 style="color: white; margin-bottom: 1rem;">Chúc mừng bạn!</h2>
+                        <p style="color: #94a3b8; margin-bottom: 2rem;">Tài khoản đã được tạo. Bây giờ bạn có thể đăng nhập.</p>
+                        <a href="login.html" class="btn-auth" style="display: block; text-decoration: none;">Đăng nhập ngay</a>
+                        <a href="index.html" style="display: inline-block; margin-top: 1.5rem; color: #94a3b8; text-decoration: none;">Về trang chủ</a>
+                    </div>
+                `;
+            } catch (err) {
+                showToast(err.message, 'error');
+                btn.disabled = false;
+                btn.textContent = 'Tạo tài khoản';
+            }
+        });
+    </script>
+</body>
+
+</html>

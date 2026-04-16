@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Sản phẩm - ShopMini</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <nav>
+        <h1 onclick="window.location.href='../index.html'" style="cursor:pointer">🛒 ShopMini</h1>
+        <ul id="main-navbar">
+            <li><a href="products.html" class="active">Sản phẩm</a></li>
+            <li><a href="customers.html">Khách hàng</a></li>
+            <li><a href="orders.html">Đặt hàng</a></li>
+            <li><a href="finance.html">Chi phí</a></li>
+            <li><a href="suppliers.html">Nhà CC</a></li>
+            <li id="nav-auth-section" style="margin-left: auto;"></li>
+        </ul>
+    </nav>
+    <script src="../js/animations.js"></script>
+    <script src="../js/auth.js"></script>
+
+    <div class="container fade-in">
+        <div class="page-header reveal">
+            <h2>📦 Quản lý Sản phẩm</h2>
+            <p>Theo dõi tồn kho, cập nhật giá và quản lý danh mục sản phẩm của quản trị viên</p>
+        </div>
+
+        <!-- Form thêm/sửa sản phẩm -->
+        <div class="form-section glass-card reveal">
+            <h2>✨ <span id="formTitle">Thêm sản phẩm mới</span></h2>
+            <form id="productForm">
+                <input type="hidden" id="productId">
+                <div class="form-group">
+                    <label>Tên sản phẩm</label>
+                    <input type="text" id="name" placeholder="Nhập tên sản phẩm..." required>
+                </div>
+                <div class="form-group">
+                    <label>Giá (VNĐ)</label>
+                    <input type="number" id="price" placeholder="Nhập giá..." required>
+                </div>
+                <div class="form-group">
+                    <label>Danh mục</label>
+                    <input type="text" id="category" placeholder="VD: Điện thoại, Laptop..." required>
+                </div>
+                <div class="form-group">
+                    <label>Số lượng tồn kho</label>
+                    <input type="number" id="stock" placeholder="Nhập số lượng..." required>
+                </div>
+                <div class="form-group full-width">
+                    <label>Mô tả chi tiết</label>
+                    <textarea id="description" placeholder="Nhập mô tả sản phẩm..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Nhà cung cấp</label>
+                    <select id="supplier">
+                        <option value="">-- Chọn nhà cung cấp --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Tồn kho tối thiểu (cảnh báo)</label>
+                    <input type="number" id="minStock" placeholder="VD: 5" min="0" value="5">
+                </div>
+                <div class="form-group">
+                    <label>Chính sách bảo hành</label>
+                    <input type="text" id="warranty" placeholder="VD: 12 tháng, Bao test 7 ngày..." value="Không bảo hành">
+                </div>
+                <div class="form-group full-width">
+                    <label>URL Hình ảnh sản phẩm</label>
+                    <input type="text" id="image" placeholder="https://...">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">💾 Lưu sản phẩm</button>
+                    <button type="button" class="btn-secondary" onclick="resetForm()">↩ Hủy bỏ</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Bảng danh sách sản phẩm -->
+        <div class="table-section glass-card reveal">
+            <h2>📋 Danh sách Sản phẩm (<span id="productCount">0</span>)</h2>
+            <div class="table-wrapper">
+                <table id="productTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">STT</th>
+                            <th>Hình ảnh</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Giá bán</th>
+                            <th>Danh mục</th>
+                            <th>Tồn kho</th>
+                            <th>Nhà cung cấp</th>
+                            <th>Bảo hành</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/products.js"></script>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="footer-brand footer-col">
+                <div class="footer-logo">🛒 ShopMini</div>
+                <p>Nền tảng mua sắm công nghệ hàng đầu Việt Nam. Sản phẩm chính hãng, giá tốt, giao hàng nhanh toàn quốc.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-btn">📘</a>
+                    <a href="#" class="social-btn">📷</a>
+                    <a href="#" class="social-btn">▶️</a>
+                    <a href="#" class="social-btn">🎵</a>
+                    <a href="#" class="social-btn">💬</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Danh mục</h4>
+                <ul>
+                    <li><a href="../index.html?category=Điện thoại#productSections">📱 Điện thoại</a></li>
+                    <li><a href="../index.html?category=Laptop#productSections">💻 Laptop</a></li>
+                    <li><a href="../index.html?category=Tablet#productSections">📋 Tablet</a></li>
+                    <li><a href="../index.html?category=Tai nghe#productSections">🎧 Tai nghe</a></li>
+                    <li><a href="../index.html?category=Đồng hồ thông minh#productSections">⌚ Đồng hồ thông minh</a></li>
+                    <li><a href="../index.html?category=Phụ kiện#productSections">🔌 Phụ kiện</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Hỗ trợ</h4>
+                <ul>
+                    <li><a href="../pages/faq.html">❓ Câu hỏi thường gặp</a></li>
+                    <li><a href="../pages/return-policy.html">🔄 Chính sách đổi trả</a></li>
+                    <li><a href="../pages/warranty.html">🛡️ Bảo hành sản phẩm</a></li>
+                    <li><a href="../pages/shipping.html">🚚 Chính sách vận chuyển</a></li>
+                    <li><a href="orders.html">📋 Theo dõi đơn hàng</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-newsletter">
+                <h4>Liên hệ</h4>
+                <ul class="footer-contact-list">
+                    <li>📍 Số 4 Nguyễn Văn Bảo, Q.Gò Vấp, TP.HCM</li>
+                    <li>📞 1234 5678 (Miễn phí, 8h–22h)</li>
+                    <li>✉️ vuphilong@shopmini.vn</li>
+                </ul>
+                <br>
+                <h4>Nhận ưu đãi</h4>
+                <p>Đăng ký nhận tin để nhận ngay voucher 50K cho đơn hàng đầu tiên!</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Email của bạn..." id="newsletterEmail">
+                    <button onclick="subscribeNewsletter()">Đăng ký</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-left">
+                © 2026 ShopMini. Made with ❤️ in Vietnam. Tất cả quyền được bảo lưu.
+            </div>
+            <div class="footer-bottom-right">
+                <a href="../pages/terms.html">Điều khoản sử dụng</a>
+                <a href="../pages/privacy.html">Chính sách bảo mật</a>
+                <a href="https://www.google.com/maps/search/Trường+Đại+học+Công+nghiệp+TP.HCM" target="_blank">Sitemap</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function subscribeNewsletter() {
+            const email = document.getElementById('newsletterEmail').value;
+            if (!email || !email.includes('@')) { alert('Vui lòng nhập email hợp lệ!'); return; }
+            alert('🎉 Đăng ký thành công! Kiểm tra hộp thư của bạn.');
+            document.getElementById('newsletterEmail').value = '';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tài Chính – ShopMini</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .finance-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .finance-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .finance-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+        }
+
+        .finance-card.revenue::before  { background: linear-gradient(90deg, var(--success), #059669); }
+        .finance-card.expense::before  { background: linear-gradient(90deg, var(--danger), #dc2626); }
+        .finance-card.profit::before   { background: linear-gradient(90deg, var(--primary), var(--secondary)); }
+
+        .finance-card:hover { 
+            transform: translateY(-5px);
+            border-color: var(--primary-light); 
+            box-shadow: var(--shadow-glow); 
+        }
+
+        .fc-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .fc-value {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .revenue .fc-value { color: var(--success); }
+        .expense .fc-value { color: var(--danger); }
+        .profit .fc-value {
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .fc-label { font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+        .fc-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; }
+
+        .comparison-board {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .comp-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .comp-label { width: 100px; font-weight: 600; font-size: 0.9rem; color: var(--text-secondary); }
+        .comp-track { flex: 1; height: 12px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; }
+        .comp-bar { height: 100%; width: 0; transition: width 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .comp-value { width: 140px; text-align: right; font-weight: 700; font-size: 1rem; }
+
+        .bar-rev { background: var(--success); }
+        .bar-exp { background: var(--danger); }
+        .bar-prof { background: var(--primary); }
+
+        .filter-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-section {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .type-card {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+            transition: var(--transition);
+        }
+        .type-card:hover { border-color: var(--primary); background: rgba(30, 41, 59, 0.6); }
+
+        .bar-track { background: rgba(51, 65, 85, 0.3); }
+        
+        .expense-type-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <h1 onclick="window.location.href='../index.html'" style="cursor:pointer">🛒 ShopMini</h1>
+        <ul id="main-navbar">
+            <li><a href="products.html">Sản phẩm</a></li>
+            <li><a href="customers.html">Khách hàng</a></li>
+            <li><a href="orders.html">Đặt hàng</a></li>
+            <li><a href="finance.html" class="active">Chi phí</a></li>
+            <li><a href="suppliers.html">Nhà CC</a></li>
+            <li id="nav-auth-section" style="margin-left: auto;"></li>
+        </ul>
+    </nav>
+    <script src="../js/animations.js"></script>
+    <script src="../js/auth.js"></script>
+
+    <div class="container fade-in">
+        <div class="page-header reveal">
+            <h2>💰 Tài Chính & Dòng Tiền</h2>
+            <p>Phân tích hiệu quả kinh doanh, doanh thu và chi phí vận hành</p>
+        </div>
+
+        <div class="filter-bar reveal">
+            <div class="form-group" style="flex-direction:row; align-items:center; gap:0.5rem; margin-bottom:0;">
+                <label style="margin-bottom:0;">📅 Từ:</label>
+                <input type="date" id="filterFrom" style="width:160px;">
+            </div>
+            <div class="form-group" style="flex-direction:row; align-items:center; gap:0.5rem; margin-bottom:0;">
+                <label style="margin-bottom:0;">Đến:</label>
+                <input type="date" id="filterTo" style="width:160px;">
+            </div>
+            <button class="btn-primary" onclick="applyFilter()">🔍 Lọc dữ liệu</button>
+            <button class="btn-secondary" onclick="clearFilter()">↺ Reset</button>
+        </div>
+
+        <div class="finance-summary reveal">
+            <div class="finance-card revenue glass-card">
+                <div class="fc-icon">💵</div>
+                <div class="fc-value" id="fcRevenue">0 đ</div>
+                <div class="fc-label">Doanh thu</div>
+                <div class="fc-sub" id="fcOrderCount">(0 đơn thành công)</div>
+            </div>
+            <div class="finance-card expense glass-card">
+                <div class="fc-icon">💸</div>
+                <div class="fc-value" id="fcExpense">0 đ</div>
+                <div class="fc-label">Tổng chi phí</div>
+                <div class="fc-sub">Ads, đóng gói, phí vận hành...</div>
+            </div>
+            <div class="finance-card profit glass-card">
+                <div class="fc-icon">📈</div>
+                <div class="fc-value" id="fcProfit">0 đ</div>
+                <div class="fc-label">Lợi nhuận ròng</div>
+                <div class="fc-sub">Doanh thu trừ chi phí</div>
+            </div>
+        </div>
+
+        <div class="chart-section glass-card reveal">
+            <h3>📊 So sánh Thu – Chi</h3>
+            <div class="comparison-board">
+                <div class="comp-item">
+                    <div class="comp-label">Doanh thu</div>
+                    <div class="comp-track"><div class="comp-bar bar-rev" id="barRevenue"></div></div>
+                    <div class="comp-value" id="barRevAmt">0 đ</div>
+                </div>
+                <div class="comp-item">
+                    <div class="comp-label">Chi phí</div>
+                    <div class="comp-track"><div class="comp-bar bar-exp" id="barExpense"></div></div>
+                    <div class="comp-value" id="barExpAmt">0 đ</div>
+                </div>
+                <div class="comp-item" style="border-top: 1px solid var(--border); padding-top: 1.5rem;">
+                    <div class="comp-label">Lợi nhuận</div>
+                    <div class="comp-track"><div class="comp-bar bar-prof" id="barProfit"></div></div>
+                    <div class="comp-value" id="barProfAmt" style="color:var(--primary-light)">0 đ</div>
+                </div>
+            </div>
+
+            <div style="margin-top:3rem;">
+                <h4 style="margin-bottom:1rem; font-size:1rem; opacity:0.8;">📂 Chi phí theo danh mục</h4>
+                <div class="type-breakdown" id="typeBreakdown" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:1rem;"></div>
+            </div>
+        </div>
+
+        <div class="form-section glass-card">
+            <h2>➕ Ghi Nhận Chi Phí Mới</h2>
+            <form id="expenseForm">
+                <div class="form-group">
+                    <label>Loại chi phí</label>
+                    <select id="eType" required>
+                        <option value="ads">📢 Quảng cáo (Ads)</option>
+                        <option value="packaging">📦 Bao bì đóng gói</option>
+                        <option value="platform_fee">🏪 Phí sàn (Shopee/TikTok)</option>
+                        <option value="shipping_fee">🚚 Phí vận chuyển</option>
+                        <option value="import_cost">🏭 Chi phí nhập hàng</option>
+                        <option value="other">📋 Khác</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Số tiền (VNĐ)</label>
+                    <input type="number" id="eAmount" placeholder="VD: 500000" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label>Ngày phát sinh</label>
+                    <input type="date" id="eDate">
+                </div>
+                <div class="form-group full-width">
+                    <label>Mô tả chi tiết</label>
+                    <input type="text" id="eDescription" placeholder="VD: Chạy ads Facebook tháng 4...">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">💾 Lưu ghi nhận</button>
+                    <button type="button" class="btn-secondary" onclick="document.getElementById('expenseForm').reset()">✕ Xoá</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="table-section glass-card">
+            <h2>📋 Lịch Sử Chi Phí</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Ngày</th>
+                            <th>Loại</th>
+                            <th>Mô tả</th>
+                            <th>Số tiền</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="expenseBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/finance.js"></script>
+
+    <footer class="site-footer">
+        <div class="footer-divider"></div>
+        <div class="footer-bottom">
+            <div class="footer-bottom-left">© 2026 ShopMini Finance.</div>
+        </div>
+    </footer>
+</body>
+
+</html>
