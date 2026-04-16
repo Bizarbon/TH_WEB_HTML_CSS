@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Khách hàng - ShopMini</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <nav>
+        <h1 onclick="window.location.href='../index.html'" style="cursor:pointer">🛒 ShopMini</h1>
+        <ul id="main-navbar">
+            <li><a href="products.html">Sản phẩm</a></li>
+            <li><a href="customers.html" class="active">Khách hàng</a></li>
+            <li><a href="orders.html">Đặt hàng</a></li>
+            <li><a href="finance.html">Chi phí</a></li>
+            <li><a href="suppliers.html">Nhà CC</a></li>
+            <li id="nav-auth-section" style="margin-left: auto;"></li>
+        </ul>
+    </nav>
+    <script src="../js/animations.js"></script>
+    <script src="../js/auth.js"></script>
+
+    <div class="container fade-in">
+        <div class="page-header reveal">
+            <h2>👥 Quản lý Khách hàng</h2>
+            <p>Danh sách khách hàng thân thiết và thông tin liên hệ</p>
+        </div>
+
+        <!-- Form -->
+        <div class="form-section glass-card reveal">
+            <h2>✨ <span id="formTitle">Thêm khách hàng mới</span></h2>
+            <form id="customerForm">
+                <input type="hidden" id="customerId">
+                <div class="form-group">
+                    <label>Họ và tên</label>
+                    <input type="text" id="name" placeholder="Nhập họ tên khách hàng..." required>
+                </div>
+                <div class="form-group">
+                    <label>Tên đăng nhập (Username)</label>
+                    <input type="text" id="username" placeholder="vuphilong, ..." required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="email@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Số điện thoại</label>
+                    <input type="text" id="phone" placeholder="09xxxxxxxx" required>
+                </div>
+                <div class="form-group full-width">
+                    <label>Địa chỉ</label>
+                    <input type="text" id="address" placeholder="Nhập địa chỉ nhận hàng...">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">💾 Lưu khách hàng</button>
+                    <button type="button" class="btn-secondary" onclick="resetForm()">↩ Hủy bỏ</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Table -->
+        <div class="table-section glass-card reveal">
+            <h2>📋 Danh sách Khách hàng (<span id="customerCount">0</span>)</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">STT</th>
+                            <th>Họ tên</th>
+                            <th>Tên đăng nhập</th>
+                            <th>SĐT</th>
+                            <th>Email</th>
+                            <th>Địa chỉ</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="customerTable"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/customers.js"></script>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="footer-brand footer-col">
+                <div class="footer-logo">🛒 ShopMini</div>
+                <p>Nền tảng mua sắm công nghệ hàng đầu Việt Nam.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-btn">📘</a>
+                    <a href="#" class="social-btn">📷</a>
+                    <a href="#" class="social-btn">▶️</a>
+                    <a href="#" class="social-btn">🎵</a>
+                    <a href="#" class="social-btn">💬</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Hỗ trợ</h4>
+                <ul>
+                    <li><a href="../pages/faq.html">❓ FAQ</a></li>
+                    <li><a href="../pages/privacy.html">🔒 Bảo mật</a></li>
+                    <li><a href="orders.html">📋 Đơn hàng</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-newsletter">
+                <h4>Liên hệ</h4>
+                <ul class="footer-contact-list">
+                    <li>📍 IUH, Gò Vấp, TP.HCM</li>
+                    <li>📞 1234 5678</li>
+                    <li>✉️ support@shopmini.vn</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-left">
+                © 2026 ShopMini. Made with ❤️ in Vietnam.
+            </div>
+            <div class="footer-bottom-right">
+                <a href="../pages/terms.html">Điều khoản</a>
+                <a href="../pages/privacy.html">Bảo mật</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function subscribeNewsletter() {
+            alert('🎉 Đăng ký thành công!');
+        }
+    </script>
+</body>
+
+</html>

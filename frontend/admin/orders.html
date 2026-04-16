@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Đơn hàng - ShopMini</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .order-product-item {
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+            padding-bottom: 0.25rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .order-product-item:last-child {
+            border-bottom: none;
+        }
+        .status-select {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.4rem 0.8rem;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            width: auto;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <h1 onclick="window.location.href='../index.html'" style="cursor:pointer">🛒 ShopMini</h1>
+        <ul id="main-navbar">
+            <li><a href="products.html">Sản phẩm</a></li>
+            <li><a href="customers.html">Khách hàng</a></li>
+            <li><a href="orders.html" class="active">Đặt hàng</a></li>
+            <li><a href="finance.html">Chi phí</a></li>
+            <li><a href="suppliers.html">Nhà CC</a></li>
+            <li id="nav-auth-section" style="margin-left: auto;"></li>
+        </ul>
+    </nav>
+    <script src="../js/animations.js"></script>
+    <script src="../js/auth.js"></script>
+
+    <div class="container fade-in">
+        <div class="page-header reveal">
+            <h2>🛒 Quản lý Đơn hàng</h2>
+            <p>Kiểm tra, cập nhật trạng thái và vận chuyển đơn hàng</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid reveal">
+            <div class="stat-card glass-card">
+                <div class="stat-icon">📈</div>
+                <div class="stat-value" id="statTotal">0</div>
+                <div class="stat-label">Tổng đơn</div>
+            </div>
+            <div class="stat-card glass-card">
+                <div class="stat-icon" style="color:var(--warning)">⏳</div>
+                <div class="stat-value" id="statPending" style="color:var(--warning)">0</div>
+                <div class="stat-label">Chờ xử lý</div>
+            </div>
+            <div class="stat-card glass-card">
+                <div class="stat-icon" style="color:var(--info)">🔄</div>
+                <div class="stat-value" id="statProcessing" style="color:var(--info)">0</div>
+                <div class="stat-label">Đang xử lý</div>
+            </div>
+            <div class="stat-card glass-card">
+                <div class="stat-icon" style="color:var(--primary-light)">🚚</div>
+                <div class="stat-value" id="statShipping" style="color:var(--primary-light)">0</div>
+                <div class="stat-label">Đang giao</div>
+            </div>
+            <div class="stat-card glass-card">
+                <div class="stat-icon" style="color:var(--success)">✅</div>
+                <div class="stat-value" id="statCompleted" style="color:var(--success)">0</div>
+                <div class="stat-label">Đã xong</div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-section glass-card reveal">
+            <h2>📋 Danh sách Đơn hàng</h2>
+            <div class="table-wrapper">
+                <table id="orderTable">
+                    <thead>
+                        <tr>
+                            <th>Mã đơn</th>
+                            <th>Khách hàng</th>
+                            <th>Sản phẩm</th>
+                            <th>Tổng tiền</th>
+                            <th>Thanh toán</th>
+                            <th>Trạng thái</th>
+                            <th>Vận chuyển</th>
+                            <th>Ngày đặt</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/orders.js"></script>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+        <div class="footer-divider"></div>
+        <div class="footer-bottom">
+            <div class="footer-bottom-left">
+                © 2026 ShopMini Dashboard.
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
